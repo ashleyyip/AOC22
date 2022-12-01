@@ -4,7 +4,7 @@ use std::cmp;
 
 
 fn main() {
-    let mut max_sum: i32 = 0;
+    let mut sums: Vec<i32> = Vec::new();
     let args: Vec<String> = env::args().collect();
     let filename = &args[1];
     println!("In file: {}", filename);
@@ -19,11 +19,17 @@ fn main() {
 
         let v2: Vec<i32> = item.split("\n").filter_map(|w| w.parse().ok()).collect();
         let cur_sum: i32 = v2.iter().sum();
-        max_sum = cmp::max(max_sum, cur_sum);
+        sums.push(cur_sum);
+
 
 
     }
-    println!("{:?}", max_sum);
+    sums.sort_by(|a, b| b.cmp(a));
+    
+    println!("{:?}", sums);
+    
+    let top_three = sums[0] + sums[1] + sums[2];
+    println!("{:?}", top_three);
 
     
 
